@@ -7,6 +7,14 @@ import 'package:twitter/viewmodels/tweet_model.dart';
 import 'package:twitter/models/user.dart';
 import 'package:intl/intl.dart';
 
+// constants
+const kPrimaryColor = Color(0xFF976FA2);
+const kSecondaryColor = Color(0xFFBAA7E3);
+const kLightColor = Color(0xFF868686);
+const kDarkColor = Color(0xFF3D3041);
+const kBackgroundColor = Color(0xFF050405);
+const kAccentColor = Color(0xFF664CF5);
+
 class TweetCard extends StatelessWidget {
   const TweetCard(this.tweet);
 
@@ -48,8 +56,11 @@ class TweetCard extends StatelessWidget {
                 ElevatedButton(
                     child: const Text('DONE'),
                     onPressed: () {
-                      tweetModel.editTweet(_tweetEditController.text, tweet.id);
-                      Navigator.pop(context);
+                      if (_tweetEditController.text.characters.isNotEmpty) {
+                        tweetModel.editTweet(
+                            _tweetEditController.text, tweet.id);
+                        Navigator.pop(context);
+                      }
                     })
               ],
             );
@@ -58,38 +69,63 @@ class TweetCard extends StatelessWidget {
 
     Widget cardMenu() {
       return PopupMenuButton(
-        color: Color.fromARGB(255, 22, 32, 42),
+        color: kBackgroundColor,
         initialValue: 2,
         icon: Icon(
-          Icons.more_vert,
-          color: Colors.white,
+          Icons.more_horiz,
+          color: kSecondaryColor,
         ),
         itemBuilder: (context) {
           return [
             PopupMenuItem(
-              value: 0,
-              child: IconButton(
-                  onPressed: () async {
+                value: 0,
+                child: InkWell(
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.edit,
+                        color: kSecondaryColor,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Expanded(
+                          child: Text(
+                        'Edit',
+                        style: TextStyle(color: kSecondaryColor),
+                      )),
+                    ],
+                  ),
+                  onTap: () async {
                     _tweetEditController.text = tweet.tweet;
                     await _showDialog();
                     Navigator.pop(context);
                   },
-                  icon: Icon(
-                    Icons.edit,
-                    color: Colors.white,
-                  )),
-            ),
+                )),
             PopupMenuItem(
               value: 1,
-              child: IconButton(
-                  onPressed: () {
-                    tweetModel.deleteTweet(tweet.id);
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(
-                    Icons.delete,
-                    color: Colors.white,
-                  )),
+              child: InkWell(
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.delete,
+                      color: kSecondaryColor,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Expanded(
+                        child: Text(
+                      'Delete',
+                      style: TextStyle(color: kSecondaryColor),
+                    )),
+                  ],
+                ),
+                onTap: () {
+                  tweetModel.deleteTweet(tweet.id);
+                  Navigator.pop(context);
+                },
+              ),
             ),
           ];
         },
@@ -131,7 +167,7 @@ class TweetCard extends StatelessWidget {
                           backgroundColor: Colors.black,
                           child: Icon(
                             Icons.person,
-                            color: Colors.white,
+                            color: kSecondaryColor,
                             size: 40,
                           ),
                           radius: 25,
@@ -157,12 +193,12 @@ class TweetCard extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 8),
+                            padding: const EdgeInsets.only(top: 10),
                             child: Text(
-                              '⬤  ' +
-                                  DateFormat('h:mm a  dd MMMM ')
-                                      .format(tweet.createdAt),
+                              DateFormat('h:mm a  dd MMMM ')
+                                  .format(tweet.createdAt),
                               style: TextStyle(
+                                  fontStyle: FontStyle.italic,
                                   color: Colors.grey[300],
                                   fontSize: 10,
                                   fontWeight: FontWeight.w300),

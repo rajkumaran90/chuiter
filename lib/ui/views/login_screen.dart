@@ -6,6 +6,14 @@ import 'package:twitter/ui/widget/common/roundedButton.dart';
 import 'package:twitter/viewmodels/login_model.dart';
 import 'package:twitter/enums/view_state.dart';
 
+// constants
+const kPrimaryColor = Color(0xFF976FA2);
+const kSecondaryColor = Color(0xFFBAA7E3);
+const kLightColor = Color(0xFF868686);
+const kDarkColor = Color(0xFF3D3041);
+const kBackgroundColor = Color(0xFF050405);
+const kAccentColor = Color(0xFF664CF5);
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -53,16 +61,16 @@ class _LoginScreenState extends State<LoginScreen> {
           icon: Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
-        backgroundColor: Colors.blue[800],
+        backgroundColor: kBackgroundColor,
       ),
-      backgroundColor: Colors.blue[800],
+      backgroundColor: kBackgroundColor,
       body: SafeArea(
         child: BaseView<LoginModel>(
           builder: (BuildContext context, LoginModel loginModel, Widget child) {
             if (ViewState.Busy == loginModel.state) {
               return Center(
                   child: CircularProgressIndicator(
-                color: Colors.red,
+                color: kAccentColor,
               ));
             }
             return SingleChildScrollView(
@@ -74,8 +82,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Center(
                       child: Image.asset(
                         'assets/bird_1.png',
-                        scale: 2,
-                        color: Colors.white,
+                        scale: 1.5,
+                        color: kPrimaryColor,
                       ),
                     ),
                   ),
@@ -83,25 +91,39 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 40, vertical: 5),
                     child: TextField(
+                      cursorColor: Colors.white,
+                      style: TextStyle(color: kSecondaryColor),
                       onChanged: (String email) {
                         loginModel.email = email;
                       },
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         hintText: 'Email',
-                        fillColor: Colors.white,
+                        hintStyle: TextStyle(color: kSecondaryColor),
+                        fillColor: kDarkColor,
                         filled: true,
-                        suffixIcon: Icon(Icons.person),
+                        suffixIcon: Icon(Icons.person, color: kSecondaryColor),
                         border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(50.0))),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(50.0),
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: kSecondaryColor, width: 2),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(50.0),
+                          ),
+                        ),
                       ),
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 40, vertical: 5),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 40, vertical: 10),
                     child: TextField(
+                      cursorColor: Colors.white,
+                      style: TextStyle(color: kSecondaryColor),
                       onChanged: (String password) {
                         loginModel.password = password;
                       },
@@ -109,12 +131,25 @@ class _LoginScreenState extends State<LoginScreen> {
                       obscureText: true,
                       decoration: InputDecoration(
                         hintText: 'Password',
-                        fillColor: Colors.white,
+                        hintStyle: TextStyle(color: kSecondaryColor),
+                        fillColor: kDarkColor,
                         filled: true,
-                        suffixIcon: Icon(Icons.lock),
+                        suffixIcon: Icon(
+                          Icons.lock,
+                          color: kSecondaryColor,
+                        ),
                         border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(50.0))),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(50.0),
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: kSecondaryColor, width: 2),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(50.0),
+                          ),
+                        ),
                       ),
                     ),
                   ),

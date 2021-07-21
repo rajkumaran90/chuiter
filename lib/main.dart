@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'locator.dart';
 import 'ui/router.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,8 +18,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Chuiter',
+      theme: ThemeData(
+        textTheme: GoogleFonts.latoTextTheme(Theme.of(context).textTheme),
+      ),
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.dark,
       initialRoute: RouteScreen.welcomeScreen,
       onGenerateRoute: RouteScreen.generateRoute,
     );

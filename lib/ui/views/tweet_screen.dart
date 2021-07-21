@@ -7,6 +7,14 @@ import 'package:twitter/ui/widget/tweet/tweet_text_field.dart';
 import 'package:twitter/viewmodels/tweet_model.dart';
 import 'package:twitter/enums/view_state.dart';
 
+// constants
+const kPrimaryColor = Color(0xFF976FA2);
+const kSecondaryColor = Color(0xFFBAA7E3);
+const kLightColor = Color(0xFF868686);
+const kDarkColor = Color(0xFF3D3041);
+const kBackgroundColor = Color(0xFF050405);
+const kAccentColor = Color(0xFF664CF5);
+
 class TweetScreen extends StatefulWidget {
   @override
   _TweetScreenState createState() => _TweetScreenState();
@@ -14,16 +22,19 @@ class TweetScreen extends StatefulWidget {
 
 class _TweetScreenState extends State<TweetScreen> {
   Widget tweetsListing(BuildContext context, TweetModel tweetModel) {
-    return ListView.separated(
-        itemBuilder: (BuildContext context, index) {
-          return TweetCard(tweetModel.tweetsList[index]);
-        },
-        separatorBuilder: (BuildContext context, int index) => const Divider(
-              height: 20,
-              thickness: 0.5,
-              color: Colors.blueGrey,
-            ),
-        itemCount: tweetModel.tweetsList.length);
+    return Padding(
+      padding: EdgeInsets.only(bottom: 85, top: 5),
+      child: ListView.separated(
+          itemBuilder: (BuildContext context, index) {
+            return TweetCard(tweetModel.tweetsList[index]);
+          },
+          separatorBuilder: (BuildContext context, int index) => const Divider(
+                height: 20,
+                thickness: 0.5,
+                color: kBackgroundColor,
+              ),
+          itemCount: tweetModel.tweetsList.length),
+    );
   }
 
   @override
@@ -38,13 +49,16 @@ class _TweetScreenState extends State<TweetScreen> {
             ));
           }
           return Scaffold(
-            backgroundColor: Color.fromARGB(255, 22, 32, 42),
+            backgroundColor: kBackgroundColor,
             bottomSheet: TweetTextField(),
             appBar: AppBar(
-              backgroundColor: Color.fromARGB(255, 22, 32, 42),
-              title: Text(
-                'Tweets',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800),
+              backgroundColor: kDarkColor,
+              title: Padding(
+                padding: const EdgeInsets.only(left: 5),
+                child: Text(
+                  'Tweets',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+                ),
               ),
               leading: Padding(
                 padding: EdgeInsets.all(10),
@@ -62,7 +76,7 @@ class _TweetScreenState extends State<TweetScreen> {
                         ),
                       )
                     : CircleAvatar(
-                        backgroundColor: Colors.black,
+                        backgroundColor: kPrimaryColor,
                         child: Icon(
                           Icons.person,
                           color: Colors.white,
@@ -73,7 +87,7 @@ class _TweetScreenState extends State<TweetScreen> {
               ),
               actions: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(top: 8, bottom: 8),
                   child: IconButton(
                     onPressed: () {
                       tweetModel.signOut();

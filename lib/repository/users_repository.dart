@@ -20,12 +20,21 @@ class UserRepository extends BaseRepository {
   }
 
   Future<void> writeUser(auth.User user) async {
-    await collectionRef.doc(user.uid).set(
-      {
-        'displayName': user.displayName,
-        'email': user.email,
-        'photoUrl': user.photoURL,
-      },
-    );
+    DocumentSnapshot snapshot = await collectionRef.doc(user.uid).get();
+
+    if (!snapshot.exists) {
+      await collectionRef.doc(user.uid).set(
+        {
+          'displayName': user.displayName,
+          'email': user.email,
+          'photoUrl': user.photoURL,
+          'createdAt': Timestamp.now()
+        },
+      );
+    } else {
+      await collectionRef
+          .doc(user.uid)
+          .set({'lastLogged': Timestamp.now()}, SetOptions(merge: true));
+    }
   }
 }
