@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "767793565429",
+    "project_id": "chuiter",
+    "storage_bucket": "chuiter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767793565429:android:6720bec2eec5ae3022bfbc",
+        "android_client_info": {
+          "package_name": "com.example.twitter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "767793565429-36to3istgcvk43nqk4rvf331pdet2r37.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.twitter",
+            "certificate_hash": "2c79f2a11ee9b2696872f1f6ebfe4c39fc3a6bb6"
+          }
+        },
+        {
+          "client_id": "767793565429-i3gim52n6vm3g4v3devjo2sbt06i1mqj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQamErF3pk1zObw5fZX_p-03WY7uRs4zM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "767793565429-i3gim52n6vm3g4v3devjo2sbt06i1mqj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

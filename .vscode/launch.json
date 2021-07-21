@@ -1,0 +1,25 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "twitter",
+      "request": "launch",
+      "type": "dart",
+      "env": {
+        "KEYSTORE_FILE": "C:/Users/remoraj90/VSCodePc/keystore/debug.keystore",
+        "KEYSTORE_PASSWORD": "android",
+        "KEY_ALIAS": "androiddebugkey",
+        "KEY_PASSWORD": "android"
+      }
+    },
+    {
+      "name": "twitter (release mode)",
+      "request": "launch",
+      "type": "dart",
+      "args": ["--release"]
+    }
+  ]
+}
