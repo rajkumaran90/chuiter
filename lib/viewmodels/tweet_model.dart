@@ -19,7 +19,7 @@ class TweetModel extends BaseModel {
   String tweetText;
   List<Tweets> tweetsList = [];
 
-  Future<void> initial() async {
+  void initial() {
     setState(ViewState.Busy);
     currentUser = _authenticationService.currentUser;
     _tweetRepository.tweetStream().listen((List<Tweets> list) {
@@ -31,9 +31,7 @@ class TweetModel extends BaseModel {
   }
 
   Future<void> sendTweet() async {
-    setState(ViewState.Busy);
     await _tweetRepository.addTweet(tweetText, currentUser.uid);
-    setState(ViewState.Idle);
   }
 
   Future<userM.User> getUserDetails(String uid) async {

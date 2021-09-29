@@ -7,7 +7,8 @@ abstract class BaseRepository {
   CollectionReference<Map<String, dynamic>> collectionRef;
 
   BaseRepository({@required this.collectionName}) {
-    FirebaseFirestore.instance.settings = Settings(persistenceEnabled: true);
-    collectionRef = FirebaseFirestore.instance.collection(this.collectionName);
+    final instance = FirebaseFirestore.instance;
+    instance.settings = Settings(persistenceEnabled: true);
+    collectionRef = instance.collection(this.collectionName);
   }
 }

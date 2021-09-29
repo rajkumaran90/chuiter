@@ -20,7 +20,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  void showErrorDialog(BuildContext context) {
+  void showErrorDialog(BuildContext context, String text) {
     showDialog(
         context: context,
         barrierDismissible: true,
@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
             title: Text(
               "Unable to Login",
             ),
-            content: Text("Please ensure your email and password are correct."),
+            content: Text(text),
             //buttons?
             actions: <Widget>[
               ElevatedButton(
@@ -43,13 +43,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _signIn(
       BuildContext context, LoginModel loginModel, bool googleSSO) async {
-    await loginModel.signIn(googleSSO);
-
-    if (loginModel.userFound == true) {
-      Navigator.pushNamedAndRemoveUntil(context, RouteScreen.tweetScreen,
-          ModalRoute.withName(RouteScreen.welcomeScreen));
-    } else {
-      showErrorDialog(context);
+    try {
+      await loginModel.signIn(googleSSO);
+      if (loginModel.userFound == true) {
+        Navigator.pushNamedAndRemoveUntil(context, RouteScreen.tweetScreen,
+            ModalRoute.withName(RouteScreen.welcomeScreen));
+      }
+    } catch (ex) {
+      showErrorDialog(context, ex);
+    } finally {
+      loginModel.setState(ViewState.Idle);
     }
   }
 
