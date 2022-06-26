@@ -8,7 +8,9 @@ abstract class BaseRepository {
 
   BaseRepository({@required this.collectionName}) {
     final instance = FirebaseFirestore.instance;
-    instance.settings = Settings(persistenceEnabled: true);
+    if (!kIsWeb) {
+      instance.settings = Settings(persistenceEnabled: true);
+    }
     collectionRef = instance.collection(this.collectionName);
   }
 }

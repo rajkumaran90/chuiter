@@ -57,8 +57,7 @@ class TweetCard extends StatelessWidget {
                     child: const Text('DONE'),
                     onPressed: () {
                       if (_tweetEditController.text.characters.isNotEmpty) {
-                        tweetModel.editTweet(
-                            _tweetEditController.text, tweet.id);
+                        tweetModel.editTweet(_tweetEditController.text, tweet.id);
                         Navigator.pop(context);
                       }
                     })
@@ -137,9 +136,7 @@ class TweetCard extends StatelessWidget {
         FutureBuilder(
           future: tweetModel.getUserDetails(tweet.createdBy),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.connectionState != ConnectionState.done ||
-                snapshot.hasError ||
-                snapshot.data == null) {
+            if (snapshot.connectionState != ConnectionState.done || snapshot.hasError || snapshot.data == null) {
               return Container();
             }
 
@@ -159,8 +156,7 @@ class TweetCard extends StatelessWidget {
                               image: NetworkImage(tweetUser.photoUrl),
                               fit: BoxFit.cover,
                             ),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(50.0)),
+                            borderRadius: BorderRadius.all(Radius.circular(50.0)),
                           ),
                         )
                       : CircleAvatar(
@@ -184,24 +180,16 @@ class TweetCard extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text(
-                              tweetUser.displayName,
+                              tweetUser.displayName ?? '',
                               overflow: TextOverflow.visible,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 13,
-                                  color: Colors.grey[300]),
+                              style: TextStyle(fontWeight: FontWeight.w900, fontSize: 13, color: Colors.grey[300]),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
                             child: Text(
-                              DateFormat('h:mm a  dd MMMM ')
-                                  .format(tweet.createdAt),
-                              style: TextStyle(
-                                  fontStyle: FontStyle.italic,
-                                  color: Colors.grey[300],
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w300),
+                              tweet.createdAt != null ? DateFormat('h:mm a  dd MMMM ').format(tweet.createdAt) : '',
+                              style: TextStyle(fontStyle: FontStyle.italic, color: Colors.grey[300], fontSize: 10, fontWeight: FontWeight.w300),
                             ),
                           )
                         ],
@@ -210,16 +198,13 @@ class TweetCard extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           tweet.tweet,
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.w400),
+                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w400),
                         ),
                       )
                     ],
                   ),
                 ),
-                tweet.createdBy == tweetModel.currentUser.uid
-                    ? cardMenu()
-                    : IconButton(onPressed: () {}, icon: Container())
+                tweet.createdBy == tweetModel.currentUser.uid ? cardMenu() : IconButton(onPressed: () {}, icon: Container())
               ],
             );
           },

@@ -1,0 +1,13 @@
+{
+  "hosting": {
+    "public": "build/web",
+    "site": "chuiter",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
