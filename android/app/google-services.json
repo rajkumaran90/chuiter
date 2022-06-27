@@ -37,6 +37,13 @@
             {
               "client_id": "767793565429-i3gim52n6vm3g4v3devjo2sbt06i1mqj.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "767793565429-5o9c5apg8f9qqjikhmepsov1b955k9c9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.twitter"
+              }
             }
           ]
         }
